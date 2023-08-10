@@ -1,0 +1,14 @@
+{
+  "name": "TaxiRideStream",
+  "description": "Stream processing for Taxi Rides to DWH",
+  "parameters": [
+    {
+      "name": "subscription_path",
+      "label": "Pub/Sub Subscription Path",
+      "helpText": "Subscription path for Pub/Sub",
+      "isOptional": false
+    }
+  ],
+  "imageSpec": "europe-west2-docker.pkg.dev/taxiridestream/taxiriderepo/taxiride_stream_etl:latest",
+  "templateLocation": "gs://streamproj/templates/taxiride_stream_etl_template"
+}

@@ -1,0 +1,4 @@
+apache-beam[gcp]==2.48.0
+avro-python3==1.10.2
+# Add other dependencies here
+

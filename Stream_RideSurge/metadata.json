@@ -1,0 +1,14 @@
+{
+  "name": "RideSurgeStream",
+  "description": "Stream processing for Surge in Taxi Rides to optimise ride price",
+  "parameters": [
+    {
+      "name": "subscription_path",
+      "label": "Pub/Sub Subscription Path",
+      "helpText": "Subscription path for Pub/Sub",
+      "isOptional": false
+    }
+  ],
+  "imageSpec": "europe-west2-docker.pkg.dev/taxiridestream/taxiriderepo/ridesurge_stream:latest",
+  "templateLocation": "gs://streamproj/templates/ridesurge_stream_template"
+}
