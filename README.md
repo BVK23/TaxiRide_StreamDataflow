@@ -66,7 +66,7 @@ During my evaluations, I closely monitored both the processing and event times o
 However, as with any real-world application, we must prepare for contingencies—like late data arrivals. Simulating such nuances requires intricate effort.
 
 <details>
-  <summary>Click to expand!</summary>
+  <summary><h1> Click to expand!</h1></summary>
   
   This is the content inside the dropdown. It can be anything: text, images, code blocks, etc.
 
