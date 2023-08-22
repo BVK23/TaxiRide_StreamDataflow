@@ -1,12 +1,12 @@
 ## Taxi Ride: Real-Time Data Streaming and Analysis
 
-**In today's transportation landscape, data is pivotal for optimizing and tailoring travel experiences. In this project, I envisioned a system that your team could harness to leverage the power of real-time data streaming to optimize taxi rides.**
+**In today's transportation landscape, data is pivotal for optimizing and tailoring travel experiences. In this project, I envisioned a system that could leverage the power of real-time data streaming to optimize taxi rides.**
 
 **Every taxi ride generates a plethora of data points - from start and end locations to time taken, ride cost, and customer feedback. While this data holds immense value, its vastness and lack of structure present challenges. Traditional batch processing techniques often fall short, unable to match the dynamic nature of the data and the immediacy of insights it promises.**
 
 > 🏗️ **This hypothetical end-to-end streaming data pipeline solution can ingest, process, and analyze taxi ride data in real-time. This offers the potential to instantly monitor and optimize various facets of the business, including dynamic pricing.**
 
-**Here's how the project was executed:(expand the drop downs)**
+**Here's how the project was executed:**
 
 ### Source Data : Avro, Pub/Sub
 
@@ -18,15 +18,21 @@ For optimized data transmission and processing, I utilized the **Avro** framewor
 
 Consequently, the serialized ride data is channeled to a **Google Cloud Pub/Sub topic**. This ensures that we simulate a live stream of taxi ride data, providing a real-time data generation and broadcasting experience.
 
-Here's a snapshot of the code:
+[Checkout the code](https://github.com/BVK23/TaxiRide_StreamDataflow/blob/main/TaxiRideDataGen/taxiridedata_pubsub_publisher.py)
 
-![Code Snapshot](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ec0c817e-979d-4f04-b300-3e885bba7a65/Untitled.png)
-
-[Link to full code ⬇️](https://github.com/BVK23/TaxiRide_StreamDataflow/blob/main/TaxiRideDataGen/taxiridedata_pubsub_publisher.py)
-
-![Screenshot of GCP Pub/Sub Topic ‘ridesdata’](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/07e83f9f-d37d-44f0-b39c-feab56a5f2bd/Untitled.png)
+![Screenshot of GCP Pub/Sub Topic ‘ridesdata’](images/Screenshot_of_GCP_Pub_Sub_Topic)
 
 **Screenshot of GCP Pub/Sub Topic ‘ridesdata’**
 
 ### Stream Processing : GCP Dataflow, Apache Beam, Big Query, Pub/Sub
+
+> At the heart of this project lies real-time stream processing. Harnessing the might of Google Cloud Platform (GCP) tools coupled with Apache Beam, I targeted two main objectives:
+> 
+
+### 1. **Real-time Data Warehousing (ETL)**
+
+> Taxi ride data, originating from our Pub/Sub topic, is channeled into a GCP Dataflow pipeline. With Apache Beam's capabilities, this pipeline efficiently filters, transforms, and loads data directly into Big Query - GCP's data warehouse.
+> 
+
+This live integration into Big Query empowers analysts to extract instant insights, enabling on-the-fly data-driven decisions. While the concept of daily batch pipelines was considered, continuous streaming proved more cost-efficient and agile solution.
 
