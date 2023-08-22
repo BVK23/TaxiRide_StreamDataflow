@@ -23,10 +23,11 @@ Consequently, the serialized ride data is channeled to a **Google Cloud Pub/Sub 
 
 ![Screenshot of GCP Pub/Sub Topic ‘ridesdata’](images/Screenshot_of_GCP_Pub_Sub_Topic.png)
 
-**Screenshot of GCP Pub/Sub Topic ‘ridesdata’**
+*Screenshot of GCP Pub/Sub Topic ‘ridesdata’*
 </details>
 
-## Stream Processing : GCP Dataflow, Apache Beam, Big Query, Pub/Sub
+<details>
+  <summary><h2> Stream Processing : GCP Dataflow, Apache Beam, Big Query, Pub/Sub </h2></summary>
 
 > At the heart of this project lies real-time stream processing. Harnessing the might of Google Cloud Platform (GCP) tools coupled with Apache Beam, I targeted two main objectives:
 > 
@@ -44,7 +45,7 @@ In addition to the earlier transforms, we incorporate another ParDo transform th
 
 ![Screenshot of the Query fetching records from the ‘rides’ table that holds the streamed data](images/screenshot_query_rides_table.png)
 
-**Screenshot of the Query fetching records from the ‘rides’ table that holds the streamed data**
+*Screenshot of the Query fetching records from the ‘rides’ table that holds the streamed data*
 
 ### 2. **Dynamic Ride Pricing based on Surge Factor**
 
@@ -61,9 +62,95 @@ As observed, the pipeline for this use case shares similarities with the DWH use
 
 ![Screenshot of the output of data streamed to Pub/Sub for dynamically adjusting price](images/screenshot_data_streamed_pubsub.png)
 
-**Screenshot of the output of data streamed to Pub/Sub for dynamically adjusting price**
+*Screenshot of the output of data streamed to Pub/Sub for dynamically adjusting price*
 
 During my evaluations, I closely monitored both the processing and event times of our windowed streaming data. The results were promising.  I executed the streaming pipeline for a new subscription under the under the topic (source data), so that as soon I deploy/run the pipeline there is no delay in processing data. 
 
 However, as with any real-world application, we must prepare for contingencies—like late data arrivals. Simulating such nuances requires intricate effort.
+</details>
 
+<details>
+  <summary><h2>Flex Template and Containerised Deployment: Docker, Artifact Registry, Cloud CLI </h2></summary>
+    
+> In pursuit to make the streaming project not just effective but also scalable and maintainable, I employed Dataflow flex templates and containerized deployment.
+> 
+    
+By employing a Flex template, I packaged the pipeline as a Docker image in Artifact Registry. The template specification, stored in Cloud Storage, points to this Docker image. On initiating the template, the Dataflow service kickstarts a launcher VM, retrieves the Docker image, and gets the pipeline running.
+
+![The Docker File](images/screenshot_docker_file.png)
+
+*The Docker File*
+
+Docker's encapsulation feature provides us with an isolated, consistent environment for our Dataflow pipeline, making it ideal for replicable deployments across various stages of our project.
+
+Designed for versatility, my pipeline isn't tethered to any specific Pub/Sub subscription. It leans on Python's argparse module and metadata-defined parameters, ensuring users provide the **`--subscription_path`** argument, indicating the intended Pub/Sub subscription.
+
+![Configurable Subscription Path](images/Configurable_subscription.png)
+
+*Configurable Subscription Path*
+
+This design ensures maximum flexibility. Whether we're running tests using one subscription or deploying in a production scenario with another, the pipeline remains consistent. Users/Devs only need to specify the appropriate subscription when triggering the pipeline.
+
+[Check the Metadata file used for creating the template](https://github.com/BVK23/TaxiRide_StreamDataflow/blob/main/Stream_ETL/metadata.json) 
+
+
+![Flex template creation](images/screenshot_flex_template_creation.png)
+
+*Flex template creation*
+
+
+![Docker Images at Artifact Registry](images/Docker_imgs_Artifact_repo.png)
+
+*Docker Images at Artifact Registry*
+</details>
+
+<details>
+  <summary><h2> CI/CD and Cloud Build </h2></summary>
+    
+> To augment the resilience and adaptability of our Taxi Ride streaming project, the integration of Continuous Integration and Continuous Delivery (CI/CD) was paramount. Google Cloud Build was our chosen mechanism to round off this comprehensive Data Engineering Project.
+> 
+
+A simple Google Cloud CLI command will set our flex template into a Dataflow job.
+
+![Command to run our Dataflow flex template job.](images/command_to_run_Dataflow.png)
+
+*Command to run our Dataflow flex template job.*
+
+However, the real challenge lay in incorporating this seamlessly into our test and production environments and CI/CD cycle. I drafted a **`cloudbuild.yaml`** file, which delineates the steps for building the Docker image, creating the flex template, and subsequently kickstarting the job.
+
+[cloudbuild.yaml file](https://github.com/BVK23/TaxiRide_StreamDataflow/blob/main/Stream_ETL/metadata.json) 
+
+The inherent compatibility of Google Cloud Build with version control systems like GitHub facilitated the automatic deployment of our pipeline upon the push of a new tag.
+
+The schematic representation of our CI/CD setup with Google Cloud Build is as follows:
+
+1. **Source Control**: Developers seamlessly commit and push their code updates to GitHub.
+2. **Trigger Activation**: The act of pushing a new tag, such as v1.0.1, activates the Cloud Build trigger.
+3. **Automated Build & Test**: Cloud Build, in its prowess, fetches the code, and adhering to the blueprint provided by the **`cloudbuild.yaml`** file, runs the build. The initial tests are executed within a test environment/project.
+4. **Deployment**: Post successful tests, we trigger the build for production, releasing the updated application.
+
+**Our Build Test illustrated below:**
+
+![Screenshot of Cloud Build Dashboard](images/screenshot_Cloud_build.png)
+
+*Screenshot of Cloud Build Dashboard*
+
+![Shows that our trigger succeeded once we pushed the changes and new tag to our repo.](images/cloud_build_trigger.png)
+
+*Shows that our trigger succeeded once we pushed the changes and new tag to our repo.*
+
+![Successful build and the pipeline is deployed on Dataflow](images/sucessfull_build_dataflow.png)
+
+*Successful build and the pipeline is deployed on Dataflow*
+
+**To Conclude:**
+
+1. **Innovation & Scalability**: Through the project, I demonstrated a keen understanding of how to capture, process, and make sense of real-time data streams. 
+2. **Expertise with Tools & Technologies**: The project made extensive use of **BigQuery**, **Google Cloud Build**, **SQL**, and **Python** - the tools and platforms pivotal to the role described. In particular, the CI/CD setup with Google Cloud Build exhibited the ability to maintain and improve data pipelines seamlessly.
+3. **Strategic Planning & Execution**: This also showcases an aptitude for strategic planning through the CI/CD setup, optimizing data flow, and ensuring timely data delivery. 
+4. **Analytical Mastery**: Handling vast and sometimes unstructured datasets requires a deft analytical touch. This project portrays my capability to sieve through such data, structure it, and derive meaningful insights - all while maintaining performance and scalability.
+
+> The Taxi Ride Streaming Project stands testament to the amalgamation of requisite skills, strategic foresight, and hands-on technical knowledge of Google Cloud, CI/CD etc. For a private hire and taxi company on the brink of innovation and expansion, this project embodies the ideal blend of technical expertise and business acumen required for the role of a Data Engineer.
+> 
+
+</details>
