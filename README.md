@@ -70,8 +70,8 @@ However, as with any real-world application, we must prepare for contingenciesâ€
 </details>
 
 <details>
-  <summary><h2>Flex Template and Containerised Deployment: Docker, Artifact Registry, Cloud CLI </h2></summary>
-    
+  <summary><h2>Flex Template and Containerised Deployment:  </h2></summary>
+###Docker, Artifact Registry, Cloud CLI    
 > In pursuit to make the streaming project not just effective but also scalable and maintainable, I employed Dataflow flex templates and containerized deployment.
 > 
     
