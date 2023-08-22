@@ -64,3 +64,14 @@ As observed, the pipeline for this use case shares similarities with the DWH use
 During my evaluations, I closely monitored both the processing and event times of our windowed streaming data. The results were promising.  I executed the streaming pipeline for a new subscription under the under the topic (source data), so that as soon I deploy/run the pipeline there is no delay in processing data. 
 
 However, as with any real-world application, we must prepare for contingencies—like late data arrivals. Simulating such nuances requires intricate effort.
+
+<details>
+  <summary>Click to expand!</summary>
+  
+  This is the content inside the dropdown. It can be anything: text, images, code blocks, etc.
+
+  ```python
+  print("Hello from inside the dropdown!")
+  ```
+</details>
+
