@@ -20,7 +20,7 @@ Consequently, the serialized ride data is channeled to a **Google Cloud Pub/Sub 
 
 [Checkout the code](https://github.com/BVK23/TaxiRide_StreamDataflow/blob/main/TaxiRideDataGen/taxiridedata_pubsub_publisher.py)
 
-![Screenshot of GCP Pub/Sub Topic ‘ridesdata’](images/Screenshot_of_GCP_Pub_Sub_Topic)
+![Screenshot of GCP Pub/Sub Topic ‘ridesdata’](images/Screenshot_of_GCP_Pub_Sub_Topic.png)
 
 **Screenshot of GCP Pub/Sub Topic ‘ridesdata’**
 
