@@ -1,4 +1,4 @@
-## Taxi Ride: Real-Time Data Streaming and Analysis
+# Taxi Ride: Real-Time Data Streaming and Analysis
 
 **In today's transportation landscape, data is pivotal for optimizing and tailoring travel experiences. In this project, I envisioned a system that could leverage the power of real-time data streaming to optimize taxi rides.**
 
@@ -8,7 +8,7 @@
 
 **Here's how the project was executed:**
 
-### Source Data : Avro, Pub/Sub
+## Source Data : Avro, Pub/Sub
 
 To mimic real-world taxi ride data, I employed a Python script that simulates and streams ride information in real-time to a Pub/Sub topic.
 
@@ -24,7 +24,7 @@ Consequently, the serialized ride data is channeled to a **Google Cloud Pub/Sub 
 
 **Screenshot of GCP Pub/Sub Topic ‘ridesdata’**
 
-### Stream Processing : GCP Dataflow, Apache Beam, Big Query, Pub/Sub
+## Stream Processing : GCP Dataflow, Apache Beam, Big Query, Pub/Sub
 
 > At the heart of this project lies real-time stream processing. Harnessing the might of Google Cloud Platform (GCP) tools coupled with Apache Beam, I targeted two main objectives:
 > 
@@ -36,3 +36,31 @@ Consequently, the serialized ride data is channeled to a **Google Cloud Pub/Sub 
 
 This live integration into Big Query empowers analysts to extract instant insights, enabling on-the-fly data-driven decisions. While the concept of daily batch pipelines was considered, continuous streaming proved more cost-efficient and agile solution.
 
+In addition to the earlier transforms, we incorporate another ParDo transform that computes the **`time_difference`** and **`cost_difference`** based on the observed data. This processed data is subsequently loaded into Big Query.
+
+[Checkout the full code](https://github.com/BVK23/TaxiRide_StreamDataflow/blob/main/TaxiRideDataGen/taxiridedata_pubsub_publisher.py)
+
+![Screenshot of the Query fetching records from the ‘rides’ table that holds the streamed data](images/screenshot_query_rides_table.png)
+
+**Screenshot of the Query fetching records from the ‘rides’ table that holds the streamed data**
+
+### 2. **Dynamic Ride Pricing based on Surge Factor**
+
+With the world moving at breakneck speed, dynamic pricing is instrumental in maintaining equilibrium between demand and supply. I formulated a 'Surge Factor' by analyzing real-time ride requests against taxi availability. A pronounced surge factor indicates higher demand, suggesting an opportune moment for a slight uptick in pricing.
+
+> This surge factor, determined in real-time within the Dataflow pipeline, is then broadcasted to a separate Pub/Sub topic. An API, responsible for deciding ride prices, listens to this topic.
+> 
+
+As a result, I've ensured ride prices adapt in real-time to live demand-supply scenarios, elevating business revenue and refining passenger experience.
+
+As observed, the pipeline for this use case shares similarities with the DWH use case up to the data deserialization step. Post this, we segment the data into 5-minute sliding windows, refreshing every minute. This approach allows us to adeptly capture any surge in rides by monitoring the ride count within a 5-minute bracket, and accordingly fine-tune our surge factor every minute to recalibrate ride prices in our taxi system.
+
+[Checkout the full code](https://github.com/BVK23/TaxiRide_StreamDataflow/blob/main/Stream_RideSurge/RideSurge_TaxiRide.py)
+
+![Screenshot of the output of data streamed to Pub/Sub for dynamically adjusting price](images/screenshot_data_streamed_pubsub.png)
+
+**Screenshot of the output of data streamed to Pub/Sub for dynamically adjusting price**
+
+During my evaluations, I closely monitored both the processing and event times of our windowed streaming data. The results were promising.  I executed the streaming pipeline for a new subscription under the under the topic (source data), so that as soon I deploy/run the pipeline there is no delay in processing data. 
+
+However, as with any real-world application, we must prepare for contingencies—like late data arrivals. Simulating such nuances requires intricate effort.
