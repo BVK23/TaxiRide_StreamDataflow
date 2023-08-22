@@ -143,14 +143,9 @@ The schematic representation of our CI/CD setup with Google Cloud Build is as fo
 
 *Successful build and the pipeline is deployed on Dataflow*
 
-**To Conclude:**
 
-1. **Innovation & Scalability**: Through the project, I demonstrated a keen understanding of how to capture, process, and make sense of real-time data streams. 
-2. **Expertise with Tools & Technologies**: The project made extensive use of **BigQuery**, **Google Cloud Build**, **SQL**, and **Python** - the tools and platforms pivotal to the role described. In particular, the CI/CD setup with Google Cloud Build exhibited the ability to maintain and improve data pipelines seamlessly.
-3. **Strategic Planning & Execution**: This also showcases an aptitude for strategic planning through the CI/CD setup, optimizing data flow, and ensuring timely data delivery. 
-4. **Analytical Mastery**: Handling vast and sometimes unstructured datasets requires a deft analytical touch. This project portrays my capability to sieve through such data, structure it, and derive meaningful insights - all while maintaining performance and scalability.
+</details>
+
 
 > The Taxi Ride Streaming Project stands testament to the amalgamation of requisite skills, strategic foresight, and hands-on technical knowledge of Google Cloud, CI/CD etc. For a private hire and taxi company on the brink of innovation and expansion, this project embodies the ideal blend of technical expertise and business acumen required for the role of a Data Engineer.
 > 
-
-</details>
