@@ -8,7 +8,8 @@
 
 **Here's how the project was executed:**
 
-## Source Data : Avro, Pub/Sub
+<details>
+  <summary><h2> Source Data : Avro, Pub/Sub </h2></summary>
 
 To mimic real-world taxi ride data, I employed a Python script that simulates and streams ride information in real-time to a Pub/Sub topic.
 
@@ -23,6 +24,7 @@ Consequently, the serialized ride data is channeled to a **Google Cloud Pub/Sub 
 ![Screenshot of GCP Pub/Sub Topic ‘ridesdata’](images/Screenshot_of_GCP_Pub_Sub_Topic.png)
 
 **Screenshot of GCP Pub/Sub Topic ‘ridesdata’**
+</details>
 
 ## Stream Processing : GCP Dataflow, Apache Beam, Big Query, Pub/Sub
 
@@ -64,14 +66,4 @@ As observed, the pipeline for this use case shares similarities with the DWH use
 During my evaluations, I closely monitored both the processing and event times of our windowed streaming data. The results were promising.  I executed the streaming pipeline for a new subscription under the under the topic (source data), so that as soon I deploy/run the pipeline there is no delay in processing data. 
 
 However, as with any real-world application, we must prepare for contingencies—like late data arrivals. Simulating such nuances requires intricate effort.
-
-<details>
-  <summary><h1> Click to expand!</h1></summary>
-  
-  This is the content inside the dropdown. It can be anything: text, images, code blocks, etc.
-
-  ```python
-  print("Hello from inside the dropdown!")
-  ```
-</details>
 
