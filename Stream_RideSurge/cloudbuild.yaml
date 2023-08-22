@@ -1,38 +1,38 @@
 options:
   logging: 'CLOUD_LOGGING_ONLY'
-  
+
 steps:
-# Build the Docker image
-# - name: 'gcr.io/cloud-builders/docker'
-#   args: ['build', '-t', 'europe-west2-docker.pkg.dev/taxiridestream/taxiriderepo/ridesurge_stream:latest', '.']
+Build the Docker image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'europe-west2-docker.pkg.dev/taxiridestream/taxiriderepo/ridesurge_stream:latest', '.']
   
-# # Push the Docker image
-# - name: 'gcr.io/cloud-builders/docker'
-#   args: ['push', 'europe-west2-docker.pkg.dev/taxiridestream/taxiriderepo/ridesurge_stream:latest']
+# Push the Docker image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'europe-west2-docker.pkg.dev/taxiridestream/taxiriderepo/ridesurge_stream:latest']
   
-# # Create the Flex Template
-# - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-#   args:
-#   - 'dataflow'
-#   - 'flex-template'
-#   - 'build'
-#   - 'gs://streamproj/templates/ridesurge_stream_template.json'
-#   - '--image-gcr-path'
-#   - 'europe-west2-docker.pkg.dev/taxiridestream/taxiriderepo/ridesurge_stream:latest'
-#   - '--sdk-language'
-#   - 'PYTHON'
-#   - '--flex-template-base-image'
-#   - 'PYTHON3'
-#   - '--metadata-file'
-#   - 'metadata.json'
-#   - '--py-path'
-#   - '.'
-#   - '--env'
-#   - 'FLEX_TEMPLATE_PYTHON_PY_FILE=RideSurge_TaxiRide.py'
-#   - '--env'
-#   - 'FLEX_TEMPLATE_PYTHON_REQUIREMENTS_FILE=requirements.txt'
+# Create the Flex Template
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args:
+  - 'dataflow'
+  - 'flex-template'
+  - 'build'
+  - 'gs://streamproj/templates/ridesurge_stream_template.json'
+  - '--image-gcr-path'
+  - 'europe-west2-docker.pkg.dev/taxiridestream/taxiriderepo/ridesurge_stream:latest'
+  - '--sdk-language'
+  - 'PYTHON'
+  - '--flex-template-base-image'
+  - 'PYTHON3'
+  - '--metadata-file'
+  - 'metadata.json'
+  - '--py-path'
+  - '.'
+  - '--env'
+  - 'FLEX_TEMPLATE_PYTHON_PY_FILE=RideSurge_TaxiRide.py'
+  - '--env'
+  - 'FLEX_TEMPLATE_PYTHON_REQUIREMENTS_FILE=requirements.txt'
   
-# Optional: Execute the pipeline. Comment out if you do not want to automatically deploy.
+#Execute the pipeline. Comment out if you do not want to automatically deploy.
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - 'gcloud'
