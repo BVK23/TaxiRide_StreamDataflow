@@ -121,7 +121,7 @@ A simple Google Cloud CLI command will set our flex template into a Dataflow job
 
 However, the real challenge lay in incorporating this seamlessly into our test and production environments and CI/CD cycle. I drafted a **`cloudbuild.yaml`** file, which delineates the steps for building the Docker image, creating the flex template, and subsequently kickstarting the job.
 
-[cloudbuild.yaml file](https://github.com/BVK23/TaxiRide_StreamDataflow/blob/main/Stream_ETL/metadata.json) 
+[cloudbuild.yaml file](https://github.com/BVK23/TaxiRide_StreamDataflow/blob/main/Stream_ETL/cloudbuild.yaml) 
 
 The inherent compatibility of Google Cloud Build with version control systems like GitHub facilitated the automatic deployment of our pipeline upon the push of a new tag.
 
